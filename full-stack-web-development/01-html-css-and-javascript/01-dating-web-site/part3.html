@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Dating Web Site Assessment - Part 1</title>
+		<meta name="author" content="Tiago Justino">
+		<style>
+			fieldset {
+				background:lightyellow;
+				border:10px solid yellow;
+				margin-bottom:10px;
+				width: 720px;
+			}
+			label {
+				width: 180px;
+				display:inline-block;
+				text-align: right;
+    			vertical-align: top;
+			}
+			textarea {
+				width:360px;
+				height:50px;
+			}
+			.autowidth {
+				width:auto;
+			}
+			.range {
+				height: 12px;
+			}
+			.rangelabel {
+				text-align:center;
+				display:inline-block;
+				width: 50px;
+				color: white;
+			}
+			.minrange {
+				background: red;
+			}
+			.maxrange {
+				background: purple;
+			}
+			label:hover {
+				font-size: 40px;
+			}
+			input:hover {
+				font-size:40px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Please Enter Your Details For Our Dating Website!</h1>
+		<br>
+		<form action="https://ihome.ust.hk/~rossiter/cgi-bin/show_everything.php" method="post" enctype="multipart/form-data">
+			<fieldset>
+				<legend>Your Face</legend>
+				<label for="avatar">Your image:</label>
+				<input type="file" id="avatar" name="avatar" required></input>
+				<br>
+				<label for="preview">Image preview:</label>
+				<img id="preview">
+			</fieldset>
+			<fieldset>
+				<legend>Your General Details</legend>
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name" placeholder="Your full name" required></input>
+				<br>
+				<label for="gender">Gender:</label>
+				<input type="radio" id="gender" name="gender" value="male" class="autowidth" required>Male</input>
+				<input type="radio" id="gender" name="gender" value="female" class="autowidth" required>Female</input>
+				<br>
+				<label for="age">Age:</label>
+				<input type="number" id="age" name="age" required></input>
+				<br>
+				<label for="birthday">Date of birth:</label>
+				<input type="date" id="birthday" name="birthday"></input>
+				<br>
+				<label for="color">Favorite color:</label>
+				<input type="color" id="color" name="color"></input>
+				<br>
+				<label for="country">Which country:</label>
+					<select id="country" name="country">
+						<option value="noselection">No Selection</option>
+						<option value="china">China</option>
+						<option value="india">India</option>
+						<option value="usa">United States</option>
+						<option value="indonesia">Indonesia</option>
+						<option value="brazil">Brazil</option>
+					</select> 
+			</fieldset>
+			<fieldset>
+				<legend>Your Indicators</legend>
+				<label for="height">Height:</label>
+				<span class="rangelabel minrange">Short</span>
+				<input class="range" type="range" id="height" name="height" min="0" max="100"></input>
+				<span class="rangelabel maxrange">Tall</span>
+				<br>
+				<label for="salary">Salary:</label>
+				<span class="rangelabel minrange">Poor</span>
+				<input class="range" type="range" id="salary" name="salary" min="0" max="100"></input>
+				<span class="rangelabel maxrange">Rich</span>
+			</fieldset>
+			<fieldset>
+				<legend>Your Contact Information</legend>
+				<label for="email" required>Email:</label>
+				<input type="email" id="email" name="email"></input>
+				<br>
+				<label for="mobile">Mobile:</label>
+				<input type="tel" id="mobile" name="mobile"></input>
+				<br>
+				<label for="address">Address:</label>
+				<textarea id="address" name="address"></textarea>
+				<br>
+				<label for="contact">Method to contact you:</label>
+				<input type="checkbox" id="contact" name="contact" value="email">Email</input>
+				<input type="checkbox" id="contact" name="contact" value="whatsapp">Whatsapp</input>
+				<input type="checkbox" id="contact" name="contact" value="inappchat">In-app chat</input>
+			</fieldset>
+			<input type="submit" value="Submit"></input>
+		</form>
+		<script src="https://www.cse.ust.hk/~rossiter/dating_web_site.js"></script>
+	</body>
+</html>

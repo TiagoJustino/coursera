@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="author" content="Tiago Justino">
+    <meta name="contact" content="tiago.vmj@gmail.com">
+    <meta charset="UTF-8">
+    <title>Matching Game</title>
+    <style>
+      img {
+        position:absolute;
+      }
+      div {
+        position:absolute;
+        width:500px;
+        height:500px;
+      }
+      #rightSide {
+        left: 500px;
+        border-left: 1px solid black;
+      }
+    </style>
+    <script>
+      var numberOfFaces = null;
+      var theLeftSide = null;
+      var theRightSide = null;
+      var smileUrl = null;
+      var divWidth = null;
+      var divHeight = null;
+      var imgWidth = null;
+      var imgHeight = null;
+      var theBody = null;
+      function removeChildren(node) {
+        while(node.firstChild) {
+          node.removeChild(node.firstChild);
+        }
+      }
+      function cleanDivs() {
+        removeChildren(theLeftSide);
+        removeChildren(theRightSide);
+      }
+      function nextLevel(event){
+        event.stopPropagation();
+        numberOfFaces += 5;
+        cleanDivs();
+        generateFaces();
+      };
+      function gameOver() {
+        alert("Game Over!");
+        theBody.onclick = null;
+        theLeftSide.lastChild.onclick = null;
+        cleanDivs();
+        init();
+      };
+      function generateFaces() {
+        for(var i = 0; i < numberOfFaces; i++) {
+          var theImg = document.createElement("img");
+          theImg.src = smileUrl;
+          theImg.style.top = Math.floor(Math.random() * (divHeight - imgHeight)) + "px";
+          theImg.style.left = Math.floor(Math.random() * (divWidth - imgWidth)) + "px";
+          theLeftSide.appendChild(theImg);
+        }
+        var leftSideImages = theLeftSide.cloneNode(true);
+        leftSideImages.removeChild(leftSideImages.lastChild);
+        theRightSide.appendChild(leftSideImages);
+        theLeftSide.lastChild.onclick = nextLevel;
+        theBody.onclick = gameOver;
+      };
+      function init() {
+        numberOfFaces = 5;
+        theLeftSide = document.getElementById("leftSide");
+        theRightSide = document.getElementById("rightSide");
+        smileUrl = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+        divWidth = 500;
+        divHeight = 500;
+        imgWidth = 100;
+        imgHeight = 100;
+        theBody = document.getElementsByTagName("body")[0];
+        generateFaces();
+      };
+    </script>
+  </head>
+  <body onLoad="init()">
+    <h1>Matching Game</h1>
+    <p>Click on the extra smiling face on the left.</p>
+    <div id="leftSide"></div>
+    <div id="rightSide"></div>
+  </body>
+</html>
+

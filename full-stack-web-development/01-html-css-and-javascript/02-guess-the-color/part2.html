@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Guess the color!</title>
+        <meta name="author" content="Tiago Justino">
+        <meta name="contact" content="tiago.vmj@gmail.com">
+        <meta charset="UTF-8">
+        <script>
+            var colors = ["aqua", "blue", "coral", "deeppink", "fuchsia", "green", "hotpink", "ivory", "khaki", "lime", "magenta", "navy", "orange", "purple", "red", "silver", "turquoise", "violet", "wheat", "yellow"];
+            var target_index = null;
+            var target = null;
+            var guess = null;
+            var guess_counter = 0;
+
+            var PROMPT_TEXT = "I am thinking of one of these colors:\n\n" + colors.join(", ") + "\n\nWhat color am I thinking of?";
+            var COLOR_UNRECOGNIZED_TEXT = "Sorry, I don't recognize your color.\n\nPlease try again."
+            var FIRST_HALF_HINT_TEXT = "Sorry, your guess is not correct!\n\nHint: your color is alphabetically ";
+            var SECOND_HALF_HINT_TEXT = " than mine.\n\nPlease try again.";
+            var LOWER_TEXT = "lower";
+            var HIGHER_TEXT = "higher";
+            var FIRST_HALF_CONGRATS_TEXT = "Congratulations! You have guessed the color!\n\nIt took you ";
+            var SECOND_HALF_CONGRATS_TEXT = " guesses to finish the game!\n\nYou can see the color in the background.";
+
+            function get_random_number(min, max) {
+                return Math.floor(Math.random() * (max + 1 - min) + min);
+            }
+            function initialize() {
+                target_index = get_random_number(0, colors.length - 1);
+                target = colors[target_index];
+            }
+            function guess_is_recognized() {
+                return colors.indexOf(guess) >= 0;
+            }
+            function check_guess() {
+                if(guess_is_recognized() == false) {
+                    alert(COLOR_UNRECOGNIZED_TEXT);
+                    return false;
+                }
+
+                if(guess < target) {
+                    alert(FIRST_HALF_HINT_TEXT + LOWER_TEXT + SECOND_HALF_HINT_TEXT);
+                    return false;
+                } else if (guess > target) {
+                    alert(FIRST_HALF_HINT_TEXT + HIGHER_TEXT + SECOND_HALF_HINT_TEXT);
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            function ask_for_color() {
+                guess = prompt(PROMPT_TEXT).toLowerCase().trim();
+                guess_counter++;
+            }
+            function finalize() {
+                myBody=document.getElementsByTagName("body")[0];
+                myBody.style.background=target;
+                alert(FIRST_HALF_CONGRATS_TEXT + guess_counter + SECOND_HALF_CONGRATS_TEXT);
+            }
+            function do_game() {
+                initialize();
+                ask_for_color();
+                while(check_guess() == false) {
+                    ask_for_color();
+                }
+                finalize();
+            }
+        </script>
+    </head>
+    <body onload="do_game()">
+    </body>
+</html>

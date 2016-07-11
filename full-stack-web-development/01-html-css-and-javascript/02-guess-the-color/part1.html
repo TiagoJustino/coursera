@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Guess the color!</title>
+        <meta name="author" content="Tiago Justino">
+        <meta name="contact" content="tiago.vmj@gmail.com">
+        <meta charset="UTF-8">
+        <script>
+            var colors = ["aqua", "blue", "coral", "deeppink", "fuchsia", "green", "hotpink", "ivory", "khaki", "lime", "magenta", "navy", "orange", "purple", "red", "silver", "turquoise", "violet", "wheat", "yellow"];
+            var target_index = null;
+            var target = null;
+            var guess = null;
+
+            var TARGET_TEXT = "DEBUG: The target color is ";
+            var PROMPT_TEXT = "I am thinking of one of these colors:\n\n" + colors.join(", ") + "\n\nWhat color am I thinking of?";
+
+            function get_random_number(min, max) {
+                return Math.floor(Math.random() * (max + 1 - min) + min);
+            }
+            function initialize() {
+                target_index = get_random_number(0, colors.length - 1);
+                target = colors[target_index];
+                alert(TARGET_TEXT + target);
+            }
+            function check_guess() {
+                return guess == target;
+            }
+            function ask_for_color() {
+                guess = prompt(PROMPT_TEXT).toLowerCase().trim();
+            }
+            function do_game() {
+                initialize();
+                ask_for_color();
+                while(check_guess() == false) {
+                    ask_for_color();
+                }
+            }
+        </script>
+    </head>
+    <body onload="do_game()">
+    </body>
+</html>
