@@ -56,7 +56,7 @@
                   class="fa fa-envelope-o"></i> Contact</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" data-target="#loginModal">
+            <li><a onclick="showLoginModal()">
                 <span class="glyphicon glyphicon-log-in"></span> Login</a>
             </li>
           </ul>
@@ -180,7 +180,8 @@
 
           <div class="col-xs-12 col-sm-2">
             <p style="padding:10%;"></p>
-            <a type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#reserveModal">Reserve Table</a>
+            <a type="button" class="btn btn-warning btn-block"
+              onclick="showReserveModal()">Reserve Table</a>
           </div>
         </div>
       </div>
@@ -365,6 +366,17 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
     <script src="js/bootstrap.min.js"></script>
+    <script>
+      function showModal(modalId) {
+        $(modalId).modal('show');
+      }
+      function showLoginModal() {
+        showModal('#loginModal')
+      }
+      function showReserveModal() {
+        showModal('#reserveModal')
+      }
+    </script>
   </body>
 
 </html>
