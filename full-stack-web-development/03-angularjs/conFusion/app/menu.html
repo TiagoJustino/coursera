@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="confusionApp">
 
   <head>
     <meta charset="utf-8">
@@ -26,17 +26,66 @@
   <body>
 
     <div class="container">
-      <div class="row row-content"
-        ng-init=" dishes=[
+      <div class="row row-content" ng-controller="menuController as menuCtrl">
+
+        <div class="col-xs-12">
+
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" ng-class="{active:menuCtrl.isSelected(0)}">
+              <a ng-click="menuCtrl.select(0)"
+                aria-controls="all menu"
+                role="tab">The Menu</a></li>
+            <li role="presentation" ng-class="{active:menuCtrl.isSelected(1)}">
+              <a ng-click="menuCtrl.select(1)"
+                aria-controls="appetizers"
+                role="tab">Appetizers</a></li>
+            <li role="presentation" ng-class="{active:menuCtrl.isSelected(2)}">
+              <a ng-click="menuCtrl.select(2)"
+                aria-controls="mains"
+                role="tab">Mains</a></li>
+            <li role="presentation" ng-class="{active:menuCtrl.isSelected(3)}">
+              <a ng-click="menuCtrl.select(3)"
+                aria-controls="desserts"
+                role="tab">Desserts</a></li>
+          </ul>
+
+          <div class="tab-conent">
+            <ul class="media-list tab-pane fade in active">
+              <li class="media" ng-repeat="dish in menuCtrl.dishes |
+                filter:menuCtrl.filtText">
+                <div class="media-left media-middle">
+                  <a href="#">
+                    <img class="media-object img-thumbnail"
+                    ng-src={{dish.image}} alt="Uthappizza">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h2 class="media-heading">{{dish.name}}
+                    <span class="label label-danger">{{dish.label}}</span>
+                    <span class="badge">{{dish.price | currency}}</span></h2>
+                  <p>{{dish.description}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script>
+      var app = angular.module('confusionApp', []);
+      app.controller('menuController', function() {
+        this.tab = 0;
+        this.filtText = '';
+        var dishes=[
           {
             name:'Uthapizza',
             image: 'images/uthapizza.png',
             category: 'mains',
             label:'Hot',
             price:'4.99',
-            description:'A unique combination of Indian Uthappam (pancake) and
-              Italian pizza, topped with Cerignola olives, ripe vine cherry
-              tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
             comment: '' },
           {
             name:'Zucchipakoda',
@@ -44,8 +93,7 @@
             category: 'appetizer',
             label:'',
             price:'1.99',
-            description:'Deep fried Zucchini coated with mildly spiced Chickpea
-              flour batter accompanied with a sweet-tangy tamarind sauce',
+            description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce',
             comment: '' },
           {
             name:'Vadonut',
@@ -53,8 +101,7 @@
             category: 'appetizer',
             label:'New',
             price:'1.99',
-            description:'A quintessential ConFusion experience, is it a vada or
-              is it a donut?',
+            description:'A quintessential ConFusion experience, is it a vada or is it a donut?',
             comment: '' },
           {
             name:'ElaiCheese Cake',
@@ -62,35 +109,20 @@
             category: 'dessert',
             label:'',
             price:'2.99',
-            description:'A delectable, semi-sweet New York Style Cheese Cake,
-              with Graham cracker crust and spiced with Indian cardamoms',
-            comment: '' } ]">
+            description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms',
+            comment: '' }
+        ];
+        this.dishes = dishes;
 
-        <div class="col-xs-12">
-          <ul class="media-list">
-            <li class="media" ng-repeat="dish in dishes">
-              <div class="media-left media-middle">
-                <a href="#">
-                  <img class="media-object img-thumbnail"
-                  ng-src={{dish.image}} alt="Uthappizza">
-                </a>
-              </div>
-              <div class="media-body">
-                <h2 class="media-heading">{{dish.name}}
-                  <span class="label label-danger">{{dish.label}}</span>
-                  <span class="badge">{{dish.price | currency}}</span></h2>
-                <p>{{dish.description}}</p>
-                <p>Comment: {{dish.comment}}</p>
-                <p>Type your comment:
-                  <input type="text" ng-model="dish.comment"></p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <script src="../bower_components/angular/angular.min.js"></script>
+        this.select = function(setTab) {
+          this.tab = setTab;
+          this.filtText = ["", "appetizer", "mains", "desser"][this.tab]
+        }
+        this.isSelected = function (checkTab) {
+          return (this.tab === checkTab);
+        }
+      });
+    </script>
   </body>
 
 </html>
