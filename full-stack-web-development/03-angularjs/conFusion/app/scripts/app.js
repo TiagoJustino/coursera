@@ -1,47 +1,61 @@
+'use strict';
 angular.module('confusionApp', [])
   .controller('MenuController', ['$scope', function($scope) {
-    'use strict';
-    $scope.showDetails = false;
-    $scope.tab = 0;
+    $scope.tab = 1;
     $scope.filtText = '';
+    $scope.showDetails = false;
     $scope.dishes=[
       {
         name:'Uthapizza',
         image: 'images/uthapizza.png',
-        category: 'mains',
+        category: 'mains', 
         label:'Hot',
         price:'4.99',
         description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
-        comment: '' },
+        comment: ''
+      },
       {
-        name:'Zucchipakoda',
+        name:'Zucchipakoda', 
         image: 'images/zucchipakoda.png',
-        category: 'appetizer',
+        category: 'appetizer', 
         label:'',
         price:'1.99',
         description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce',
-        comment: '' },
+        comment: ''
+      },
       {
-        name:'Vadonut',
+        name:'Vadonut', 
         image: 'images/vadonut.png',
-        category: 'appetizer',
+        category: 'appetizer', 
         label:'New',
         price:'1.99',
         description:'A quintessential ConFusion experience, is it a vada or is it a donut?',
-        comment: '' },
+        comment: ''
+      },
       {
-        name:'ElaiCheese Cake',
+        name:'ElaiCheese Cake', 
         image: 'images/elaicheesecake.png',
-        category: 'dessert',
+        category: 'dessert', 
         label:'',
         price:'2.99',
         description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms',
-        comment: '' }
+        comment: ''
+      }
     ];
-
     $scope.select = function(setTab) {
       $scope.tab = setTab;
-      $scope.filtText = ["", "appetizer", "mains", "desser"][$scope.tab];
+      if (setTab === 2) {
+        $scope.filtText = "appetizer";
+      }
+      else if (setTab === 3) {
+        $scope.filtText = "mains";
+      }
+      else if (setTab === 4) {
+        $scope.filtText = "dessert";
+      }
+      else {
+        $scope.filtText = "";
+      }
     };
     $scope.isSelected = function (checkTab) {
       return ($scope.tab === checkTab);
@@ -59,23 +73,21 @@ angular.module('confusionApp', [])
   .controller('FeedbackController', ['$scope', function($scope) {
     $scope.sendFeedback = function() {
       console.log($scope.feedback);
-      if ($scope.feedback.agree && ($scope.feedback.mychannel == "")&& !$scope.feedback.mychannel) {
+      if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
         $scope.invalidChannelSelection = true;
         console.log('incorrect');
       }
       else {
         $scope.invalidChannelSelection = false;
-        $scope.feedback = {mychannel:"", firstName:"", lastName:"",
-          agree:false, email:"" };
+        $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
         $scope.feedback.mychannel="";
-
         $scope.feedbackForm.$setPristine();
         console.log($scope.feedback);
       }
     };
   }])
   .controller('DishDetailController', ['$scope', function($scope) {
-    $scope.dish={
+    var dish={
       name:'Uthapizza',
       image: 'images/uthapizza.png',
       category: 'mains', 
@@ -113,7 +125,21 @@ angular.module('confusionApp', [])
           author:"25 Cent",
           date:"2011-12-02T17:57:28.556094Z"
         }
-
       ]
     };
+    $scope.dish = dish;
+  }])
+  .controller('DishCommentController', ['$scope', function($scope) {
+    $scope.comment = {name:"", stars:5, comments:""};
+    $scope.submitComment = function () {
+      var date = new Date().toISOString();
+      $scope.dish.comments.push({
+        rating: $scope.comment.stars,
+        comment: $scope.comment.comments,
+        author: $scope.comment.name,
+        date: date
+      });
+      $scope.comment = {name:"", stars:5, comments:""};
+      $scope.commentForm.$setPristine();
+    }
   }]);

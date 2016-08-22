@@ -108,10 +108,10 @@
                             <span ng-show="(feedbackForm.emailid.$invalid || feedbackForm.emailid.$error.required) && !feedbackForm.emailid.$pristine" class="help-block">Enter a valid email address.</span>
                         </div>
                     </div>
-                    <div class="form-group"  ng-class="{ 'has-error' : invalidChannelSelection }">                       <div class="checkbox col-sm-5 col-sm-offset-2">
+                    <div class="form-group"  ng-class="{ 'has-error' : invalidChannelSelection }">
+                      <div class="checkbox col-sm-5 col-sm-offset-2">
                         <label class="checkbox-inline">
-                          <input type="checkbox"
-                          ng-model="feedback.agree">
+                          <input type="checkbox" ng-model="feedback.agree">
                           <strong>May we contact you?</strong>
                         </label>
                       </div>
