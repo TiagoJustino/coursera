@@ -4,7 +4,7 @@ angular.module('confusionApp')
     $scope.tab = 1;
     $scope.filtText = '';
     $scope.showDetails = false;
-    $scope.dishes = menuFactory.getDishes();
+    $scope.dishes= menuFactory.getDishes();
     $scope.select = function(setTab) {
       $scope.tab = setTab;
       if (setTab === 2) {
@@ -50,19 +50,26 @@ angular.module('confusionApp')
     };
   }])
   .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
-    $scope.dish = menuFactory.getDish(parseInt($stateParams.id, 10));
+    var dish= menuFactory.getDish(parseInt($stateParams.id,10));
+    $scope.dish = dish;
   }])
   .controller('DishCommentController', ['$scope', function($scope) {
-    $scope.comment = {name:"", stars:5, comments:""};
+    $scope.mycomment = {rating:5, comment:"", author:"", date:""};
     $scope.submitComment = function () {
-      var date = new Date().toISOString();
-      $scope.dish.comments.push({
-        rating: $scope.comment.stars,
-        comment: $scope.comment.comments,
-        author: $scope.comment.name,
-        date: date
-      });
-      $scope.comment = {name:"", stars:5, comments:""};
+      $scope.mycomment.date = new Date().toISOString();
+      console.log($scope.mycomment);
+      $scope.dish.comments.push($scope.mycomment);
       $scope.commentForm.$setPristine();
+      $scope.mycomment = {rating:5, comment:"", author:"", date:""};
     }
-  }]);
+  }])
+  .controller('IndexController', ['$scope', '$stateParams', 'menuFactory', 'corporateFactory', function($scope, $stateParams, menuFactory, corporateFactory) {
+    $scope.featuredDish = menuFactory.getDish(0);
+    $scope.promotion = menuFactory.getPromotion(0);
+    $scope.executiveChef = corporateFactory.getLeader(3);
+  }])
+  .controller('AboutController', ['$scope', '$stateParams', 'corporateFactory', function($scope, $stateParams, corporateFactory) {
+    $scope.leaders = corporateFactory.getLeaders();
+  }])
+  // implement the IndexController and About Controller here
+;
