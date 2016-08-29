@@ -5,18 +5,19 @@
       <h3 align=center>Our Lipsmacking Culinary Creations</h3>
     </div>
     <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+      <!-- Featured Dish -->
       <div class="media">
         <div class="media-left media-middle">
           <a href="#">
             <img class="media-object img-thumbnail"
-            ng-src="{{featuredDish.image}}" alt="{{featuredDish.name}}">
+            ng-src="{{dish.image}}" alt="{{dish.name}}">
           </a>
         </div>
         <div class="media-body">
-          <h2 class="media-heading">{{featuredDish.name}} <span class="label
-              label-danger">{{featuredDish.label}}</span> <span
-              class="badge">{{featuredDish.price | currency}}</span></h2>
-          <p>{{featuredDish.description}}</p>
+          <h2 class="media-heading">{{dish.name}} <span class="label
+              label-danger">{{dish.label}}</span> <span
+              class="badge">{{dish.price | currency}}</span></h2>
+          <p>{{dish.description}}</p>
         </div>
       </div>
     </div>
@@ -27,6 +28,7 @@
       <h3 align=center>This Month's Promotions</h3>
     </div>
     <div class="col-xs-12 col-sm-9">
+      <!-- Featured Promotion -->
       <div class="media">
         <div class="media-body">
           <h2 class="media-heading">{{promotion.name}} <span class="label
@@ -49,6 +51,7 @@
       <h3 align=center>Meet our Culinary Specialists</h3>
     </div>
     <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+      <!-- Executive Chef -->
       <div class="media">
         <div class="media-left media-middle">
           <a href="#">
