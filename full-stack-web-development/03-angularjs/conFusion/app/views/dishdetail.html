@@ -40,35 +40,35 @@
       <ul class="list-unstyled" ng-show="commentForm.$valid && commentForm.$dirty">
         <li class="media">
           <blockquote>
-            <p>{{comment.stars}} Stars</p>
-            <p>{{comment.comments}}</p>
-            <footer>{{comment.name}},</footer>
+            <p>{{mycomment.rating}} Stars</p>
+            <p>{{mycomment.comment}}</p>
+            <footer>{{mycomment.author}},</footer>
           </blockquote>
         </li>
       </ul>
       <form class="form-horizontal" name="commentForm" ng-submit="submitComment()" novalidate>
-        <div class="form-group" ng-class="{ 'has-error' : commentForm.name.$error.required && !commentForm.name.$pristine }">
-          <label for="name" class="col-sm-2 control-label">Enter Name</label>
+        <div class="form-group" ng-class="{ 'has-error' : commentForm.author.$error.required && !commentForm.author.$pristine }">
+          <label for="author" class="col-sm-2 control-label">Enter Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name", ng-model="comment.name" required>
-            <span ng-show="commentForm.name.$error.required && !commentForm.name.$pristine" class="help-block">Your name is required.</span>
+            <input type="text" class="form-control" id="author" name="author" placeholder="Enter Your Name", ng-model="mycomment.author" required>
+            <span ng-show="commentForm.author.$error.required && !commentForm.author.$pristine" class="help-block">Your name is required.</span>
           </div>
         </div>
         <div class="form-group">
-          <label for="stars" class="col-sm-2 control-label">Number of Stars</label>
+          <label for="rating" class="col-sm-2 control-label">Number of Stars</label>
           <div class="col-sm-6">
-            <label class="radio-inline"><input type="radio" name="stars" ng-model="comment.stars" value="1">1</label>
-            <label class="radio-inline"><input type="radio" name="stars" ng-model="comment.stars" value="2">2</label>
-            <label class="radio-inline"><input type="radio" name="stars" ng-model="comment.stars" value="3">3</label>
-            <label class="radio-inline"><input type="radio" name="stars" ng-model="comment.stars" value="4">4</label>
-            <label class="radio-inline"><input type="radio" name="stars" ng-model="comment.stars" value="5">5</label>
+            <label class="radio-inline"><input type="radio" name="rating" ng-model="mycomment.rating" value="1">1</label>
+            <label class="radio-inline"><input type="radio" name="rating" ng-model="mycomment.rating" value="2">2</label>
+            <label class="radio-inline"><input type="radio" name="rating" ng-model="mycomment.rating" value="3">3</label>
+            <label class="radio-inline"><input type="radio" name="rating" ng-model="mycomment.rating" value="4">4</label>
+            <label class="radio-inline"><input type="radio" name="rating" ng-model="mycomment.rating" value="5">5</label>
           </div>
         </div>
-        <div class="form-group" ng-class="{ 'has-error' : commentForm.comments.$error.required && !commentForm.comments.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error' : commentForm.comment.$error.required && !commentForm.comment.$pristine }">
           <label for="comments" class="col-sm-2 control-label">Your Comments</label>
           <div class="col-sm-10">
-            <textarea class="form-control" id="comments" name="comments" rows="12" ng-model="comment.comments" required></textarea>
-            <span ng-show="commentForm.comments.$error.required && !commentForm.comments.$pristine" class="help-block">Your comments are required.</span>
+            <textarea class="form-control" id="comments" name="comments" rows="12" ng-model="mycomment.comment" required></textarea>
+            <span ng-show="commentForm.comment.$error.required && !commentForm.comment.$pristine" class="help-block">Your comments are required.</span>
           </div>
         </div>
         <div class="form-group">
