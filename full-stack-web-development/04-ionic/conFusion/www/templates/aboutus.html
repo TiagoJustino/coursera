@@ -16,17 +16,16 @@
           the first time the world's best cuisines in a pan.</p>
       </div>
     </div>
-    <div class="card">
+    <div class="list list-inset">
       <div class="item item-divider">
         Corporate Leadership
       </div>
-      <ul class="list list-inset">
-        <li class="item item-avatar item-text-wrap" ng-repeat="leader in leaders">
-          <img ng-src="{{baseURL+leader.image}}">
-          <h2>{{leader.name}}</h2>
-          <h3>{{leader.designation}}</h3>
-          <p>{{leader.description}}</p>
-        </li>
-      </ul>
+      <div class="item item-avatar item-text-wrap" ng-repeat="leader in leaders">
+        <img ng-src="{{baseURL+leader.image}}">
+        <h2>{{leader.name}}</h2>
+        <h3>{{leader.designation}}</h3>
+        <p>{{leader.description}}</p>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
