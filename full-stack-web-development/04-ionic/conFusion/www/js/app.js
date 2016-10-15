@@ -25,13 +25,21 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/sidebar.html',
     controller: 'AppCtrl'
   })
-
+  .state('app.favorites', {
+    url: '/favorites',
+    views: {
+      'mainContent': {
+        templateUrl: 'templates/favorites.html',
+        controller:'FavoritesController'
+      }
+    }
+  })
   .state('app.home', {
     url: '/home',
     views: {
@@ -41,34 +49,32 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
       }
     }
   })
-
   .state('app.aboutus', {
-      url: '/aboutus',
-      views: {
-        'mainContent': {
-          templateUrl: 'templates/aboutus.html',
-          controller: 'AboutController'
-        }
+    url: '/aboutus',
+    views: {
+      'mainContent': {
+        templateUrl: 'templates/aboutus.html',
+        controller: 'AboutController'
       }
-    })
+    }
+  })
   .state('app.contactus', {
-      url: '/contactus',
-      views: {
-        'mainContent': {
-          templateUrl: 'templates/contactus.html'
-        }
+    url: '/contactus',
+    views: {
+      'mainContent': {
+        templateUrl: 'templates/contactus.html'
       }
-    })
-    .state('app.menu', {
-      url: '/menu',
-      views: {
-        'mainContent': {
-          templateUrl: 'templates/menu.html',
-          controller: 'MenuController'
-        }
+    }
+  })
+  .state('app.menu', {
+    url: '/menu',
+    views: {
+      'mainContent': {
+        templateUrl: 'templates/menu.html',
+        controller: 'MenuController'
       }
-    })
-
+    }
+  })
   .state('app.dishdetails', {
     url: '/menu/:id',
     views: {

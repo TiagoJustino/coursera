@@ -39,9 +39,43 @@ angular.module('conFusion.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+  $scope.reservation = {};
+
+  // Create the reserve modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/reserve.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.reserveform = modal;
+  });
+
+  // Triggered in the reserve modal to close it
+  $scope.closeReserve = function() {
+    $scope.reserveform.hide();
+  };
+
+  // Open the reserve modal
+  $scope.reserve = function() {
+    $scope.reserveform.show();
+  };
+
+  // Perform the reserve action when the user submits the reserve form
+  $scope.doReserve = function() {
+    console.log('Doing reservation', $scope.reservation);
+
+    // Simulate a reservation delay. Remove this and replace with your reservation
+    // code if using a server system
+    $timeout(function() {
+      $scope.closeReserve();
+    }, 1000);
+  };
 })
 
-.controller('MenuController', ['$scope', 'menuFactory', 'baseURL', function($scope, menuFactory, baseURL) {
+.controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory',
+            'baseURL', '$ionicListDelegate', function ($scope, menuFactory,
+                                                       favoriteFactory,
+                                                       baseURL,
+                                                       $ionicListDelegate) {
   $scope.baseURL = baseURL;
   $scope.tab = 1;
   $scope.filtText = '';
@@ -79,6 +113,11 @@ angular.module('conFusion.controllers', [])
     $scope.toggleDetails = function() {
       $scope.showDetails = !$scope.showDetails;
     };
+    $scope.addFavorite = function (index) {
+        console.log("index is " + index);
+        favoriteFactory.addToFavorites(index);
+        $ionicListDelegate.closeOptionButtons();
+    }
 }])
 
 .controller('ContactController', ['$scope', function($scope) {
@@ -161,4 +200,62 @@ angular.module('conFusion.controllers', [])
   $scope.baseURL = baseURL;
   $scope.leaders = corporateFactory.query();
   console.log($scope.leaders);
-}]);
+}])
+.controller('FavoritesController', ['$scope', 'menuFactory', 'favoriteFactory',
+            'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading',
+            '$timeout', function ($scope, menuFactory, favoriteFactory,
+                                  baseURL, $ionicListDelegate, $ionicPopup,
+                                  $ionicLoading, $timeout) {
+  $scope.baseURL = baseURL;
+  $scope.shouldShowDelete = false;
+  $ionicLoading.show({
+    template: '<ion-spinner></ion-spinner> Loading...'
+  });
+  $scope.favorites = favoriteFactory.getFavorites();
+  $scope.dishes = menuFactory.getDishes().query(
+    function (response) {
+      $scope.dishes = response;
+      $timeout(function () {
+        $ionicLoading.hide();
+      }, 1000);
+    },
+    function (response) {
+      $scope.message = "Error: " + response.status + " " + response.statusText;
+      $timeout(function () {
+        $ionicLoading.hide();
+      }, 1000);
+    }
+  );
+  console.log($scope.dishes, $scope.favorites);
+  $scope.toggleDelete = function () {
+    $scope.shouldShowDelete = !$scope.shouldShowDelete;
+    console.log($scope.shouldShowDelete);
+  }
+  $scope.deleteFavorite = function (index) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Confirm Delete',
+      template: 'Are you sure you want to delete this item?'
+    });
+    confirmPopup.then(function (res) {
+      if (res) {
+        console.log('Ok to delete');
+        favoriteFactory.deleteFromFavorites(index);
+      } else {
+        console.log('Canceled delete');
+      }
+    });
+    $scope.shouldShowDelete = false;
+  }
+}])
+.filter('favoriteFilter', function () {
+  return function (dishes, favorites) {
+    var out = [];
+    for (var i = 0; i < favorites.length; i++) {
+      for (var j = 0; j < dishes.length; j++) {
+        if (dishes[j].id === favorites[i].id)
+          out.push(dishes[j]);
+      }
+    }
+    return out;
+  }
+});
