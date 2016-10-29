@@ -225,10 +225,11 @@ $ionicListDelegate, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
 }])
 
 .controller('DishDetailController', ['$scope', '$stateParams', 'dish',
-            'menuFactory', 'favoriteFactory', 'baseURL', '$ionicPopover',
-            '$ionicModal', function ($scope, $stateParams, dish, menuFactory,
-                                     favoriteFactory, baseURL, $ionicPopover,
-                                     $ionicModal) {
+'menuFactory', 'favoriteFactory', 'baseURL', '$ionicPopover', '$ionicModal',
+'$ionicPlatform', '$cordovaLocalNotification', '$cordovaToast', function
+($scope, $stateParams, dish, menuFactory, favoriteFactory, baseURL,
+$ionicPopover, $ionicModal, $ionicPlatform, $cordovaLocalNotification,
+$cordovaToast) {
   $scope.baseURL = baseURL;
   $scope.dish = dish;
   $scope.mycomment = {rating:5, comment:"", author:"", date:""};
@@ -268,6 +269,26 @@ $ionicListDelegate, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
   };
   $scope.addToFavorites = function() {
     favoriteFactory.addToFavorites($scope.dish.id);
+    $ionicPlatform.ready(function () {
+      $cordovaLocalNotification.schedule({
+          id: 1,
+          title: "Added Favorite",
+          text: $scope.dish.name
+      }).then(function () {
+          console.log('Added Favorite '+$scope.dish.name);
+      },
+      function () {
+          console.log('Failed to add Notification ');
+      });
+
+      $cordovaToast
+        .show('Added Favorite '+$scope.dish.name, 'long', 'bottom')
+        .then(function (success) {
+            // success
+        }, function (error) {
+            // error
+        });
+    });
     $scope.closePopover();
   };
   $scope.addComment = function() {
@@ -304,9 +325,9 @@ $ionicListDelegate, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
   $scope.leaders = leaders;
 }])
 .controller('FavoritesController', ['$scope', 'dishes', 'favorites',
-            'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup',
+            'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup', '$cordovaVibration',
             function ($scope, dishes, favorites, favoriteFactory, baseURL,
-                      $ionicListDelegate, $ionicPopup) {
+                      $ionicListDelegate, $ionicPopup, $cordovaVibration) {
   $scope.baseURL = baseURL;
   $scope.shouldShowDelete = false;
   $scope.favorites = favorites;
@@ -325,6 +346,7 @@ $ionicListDelegate, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
       if (res) {
         console.log('Ok to delete');
         favoriteFactory.deleteFromFavorites(index);
+        $cordovaVibration.vibrate(100);
       } else {
         console.log('Canceled delete');
       }
