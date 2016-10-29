@@ -1,6 +1,6 @@
 angular.module('conFusion.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $ionicPlatform, $cordovaCamera) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $ionicPlatform, $cordovaCamera, $cordovaImagePicker) {
   $scope.registration = {};
   // Create the registration modal that we will use later
   $ionicModal.fromTemplateUrl('templates/register.html', {
@@ -50,6 +50,21 @@ angular.module('conFusion.controllers', [])
           $scope.registerform.show();
 
       };
+       $scope.pickImage = function() {
+				var options = {
+					 maximumImagesCount: 1,
+					 width: 100,
+					 height: 100,
+					 quality: 50
+					};
+
+					$cordovaImagePicker.getPictures(options)
+						.then(function (results) {
+              $scope.registration.imgSrc = results[0];
+						}, function(error) {
+              console.log(err);
+						});
+				}
   });
 
   // With the new view caching in Ionic, Controllers are only called
