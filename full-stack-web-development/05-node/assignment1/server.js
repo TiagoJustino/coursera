@@ -1,6 +1,5 @@
 var express      = require('express');
 var morgan       = require('morgan');
-var bodyParser   = require('body-parser');
 
 var dishRouter   = require('./dishRouter');
 var promoRouter  = require('./promoRouter');
