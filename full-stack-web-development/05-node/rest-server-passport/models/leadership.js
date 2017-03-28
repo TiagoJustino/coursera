@@ -4,7 +4,7 @@ require('mongoose-currency').loadType(mongoose);
 
 var Currency = mongoose.Types.Currency;
 
-var promotionSchema = new Schema({
+var leaderSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -30,4 +30,4 @@ var promotionSchema = new Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Leader', promotionSchema);
+module.exports = mongoose.model('Leader', leaderSchema);

@@ -1,0 +1,19 @@
+1. Can you summarize in two sentences the central idea of your project?
+
+- MyMovies is a website for keeping track of movies you've watched, want to
+  watch and don't want to watch. It leverages the IMDB database by allowing the
+  user to Add custom information like rate and comments.
+
+2. Do you have any examples that you look up to for inspiration to suggest
+   ideas for your project?
+
+- filmow.com already implements a similar idea.
+
+3. How are the end-users going to benefit from your idea?
+
+- Cinema fans.
+
+4. What is the opportunity gap that you are trying to fill with your idea?
+
+- Tracking the movie watching habits of the user will help the cinema industry
+  on targeting its customer more precisely.
