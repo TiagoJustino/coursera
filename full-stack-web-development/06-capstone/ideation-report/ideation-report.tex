@@ -26,12 +26,8 @@
 % title page.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\title{Title page with logo}
-%----------------------------------------------------------------------------------------
-%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
 
-\documentclass[12pt]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
@@ -42,136 +38,162 @@
 
 \begin{titlepage}
 
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
-\center % Center everything on the page
- 
-%----------------------------------------------------------------------------------------
-%	HEADING SECTIONS
-%----------------------------------------------------------------------------------------
+\center
 
-\textsc{\LARGE Coursera}\\ % Name of your university/college
-\textsc{\large The Hong Kong University of Science and Technology}\\[1cm] % Name of your university/college
-\textsc{\Large Full Stack Web Development Specialization}\\[0.5cm] % Major heading such as course name
-\textsc{\large Capstone Project}\\[0.5cm] % Minor heading such as course title
-
-%----------------------------------------------------------------------------------------
-%	TITLE SECTION
-%----------------------------------------------------------------------------------------
+\textsc{\LARGE Coursera}\\
+\textsc{\large The Hong Kong University of Science and Technology}\\[1cm]
+\textsc{\Large Full Stack Web Development Specialization}\\[0.5cm]
+\textsc{\large Capstone Project}\\[0.5cm]
 
 \HRule \\[0.4cm]
-% { \huge \bfseries MyMovies}\\[0.4cm] % Title of your document
-\includegraphics[width=.5\paperwidth]{mymovies.png} % Include a department/university logo - this will require the graphicx package
+\includegraphics[width=.5\paperwidth]{mymovies.png}
 \HRule \\[1cm]
  
-%----------------------------------------------------------------------------------------
-%	AUTHOR SECTION
-%----------------------------------------------------------------------------------------
 
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
 \emph{Author:}\\
-Tiago \textsc{Justino} % Your name
+Tiago \textsc{Justino}
 \end{flushleft}
 \end{minipage}
 ~
 \begin{minipage}{0.4\textwidth}
 \begin{flushright} \large
 \emph{Supervisor:} \\
-Jogesh \textsc{Muppala} % Supervisor's Name
+Jogesh \textsc{Muppala}
 \end{flushright}
 \end{minipage}\\[1cm]
 
-% If you don't want a supervisor, uncomment the two lines below and remove the section above
-%\Large \emph{Author:}\\
-%John \textsc{Smith}\\[3cm] % Your name
 
-%----------------------------------------------------------------------------------------
-%	DATE SECTION
-%----------------------------------------------------------------------------------------
+{\large \today}\\[1cm]
 
-{\large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
-
-%----------------------------------------------------------------------------------------
-%	LOGO SECTION
-%----------------------------------------------------------------------------------------
-
-\vfill % Fill the rest of the page with whitespace
+\vfill
 \includegraphics[width=.2\paperwidth]{coursera.png}
 \hspace{2cm}
-\includegraphics[width=.2\paperwidth]{hkust.png} % Include a department/university logo - this will require the graphicx package
-
-%----------------------------------------------------------------------------------------
-
+\includegraphics[width=.2\paperwidth]{hkust.png}
 
 \end{titlepage}
-
+%----------------------------------------------------------------------------------------
 
 \begin{abstract}
 Your abstract.
 \end{abstract}
+\newpage
 
 \section{Introduction}
 
-Your introduction goes here! Some examples of commonly used commands and features are listed below, to help you get started.
+Cinema fans. - ???
 
-If you have a question, please use the support box in the bottom right of the screen to get in touch. 
+A brief introduction to your website/application idea. State the goals of the
+project.
 
-\section{Some \LaTeX{} Examples}
-\label{sec:examples}
+MyMovies is a website for keeping track of movies you've watched, want to
+watch and don't want to watch. It leverages the IMDB database by allowing the
+user to Add custom information, e.g., rating and comments.
 
-\subsection{Sections}
+The values / benefits (tangible and intangible) this application can bring to a
+company/organization/end-user.
 
-Use section and subsection commands to organize your document. \LaTeX{} handles all the formatting and numbering automatically. Use ref and label commands for cross-references.
+Tracking the movie watching habits of the user will help the cinema industry
+on targeting its customer more precisely.
 
-\subsection{Comments}
+\section{Expected List of Features}
 
-Comments can be added to the margins of the document using the \todo{Here's a comment in the margin!} todo command, as shown in the example on the right. You can also add inline comments too:
-
-\todo[inline, color=green!40]{This is an inline comment.}
-
-\subsection{Tables and Figures}
-
-Use the table and tabular commands for basic tables --- see Table~\ref{tab:widgets}, for example. You can upload a figure (JPEG, PNG or PDF) using the files menu. To include it in your document, use the includegraphics command as in the code for Figure~\ref{fig:frog} below.
-
-% Commands to include a figure:
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{frog.jpg}
-\caption{\label{fig:frog}This is a figure caption.}
-\end{figure}
-
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
-
-\subsection{Mathematics}
-
-\LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
-$$S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i$$
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
-
-\subsection{Lists}
-
-You can make lists with automatic numbering \dots
-
-\begin{enumerate}
-\item Like this,
-\item and like this.
-\end{enumerate}
-\dots or bullet points \dots
 \begin{itemize}
-\item Like this,
-\item and like this.
+  \item Register / Login with or without Facebook.
+  \item Add friends (they need to accept your request)
+  \item Follow other users (friends are followed by default, but you can
+    unfollow a friend without unfriending them)
+  \item Mark a movie as watching, watched, want to watch, don't want to watch.
+  \item Movies marked as watched can be rated, favorited and commented.
+  \item Movies marked as watching are automatically marked as watched after the
+    movie duration (known from imdb api).
+  \item When marking a movie as watching or watched the user can mark a friend
+    in "watching with"
+  \item The user can add a date (day, month or year) for movies watched in the
+    past. Date is not mandatory.
+  \item A movie can be marked as watched more than once.
+  \item There will be a timeline where the user can see the activities of whom
+    they follow.
+  \item A user can like or comment friend's activities.
+  \item A comment (or part of it) can be marked as spoiler.
+  \item Comments marked as spoiler appear with a warning message on a user
+    timeline if they haven't watched that movie.
+  \item groups
 \end{itemize}
 
-We hope you find write\LaTeX\ useful, and please let us know if you have any feedback using the help menu above.
+future work
+
+\begin{itemize}
+  \item add location to movies marked as watching / watched
+  \item recommend movies based on:
+    \begin{itemize}
+      \item previous watched movies
+      \item movies they want to watch
+      \item friend's activities
+      \item likes
+    \end{itemize}
+  \item recommend near movie theaters for movies they want to watch
+  \item search movie streaming services for movies they want to watch and check
+    prices.
+  \item allow the user to register movie streaming services they subscribe and
+    search on them for movies they want to watch
+\end{itemize}
+
+A brief list of features that you expect your application to support.
+
+Brief justifications for including these features.
+
+\section{Market Survey}
+
+filmow.com already implements a similar idea.
+
+Do a survey of the Web and Apple Store and Google Play Store to find about five
+web sites and/or applications that might have similar ideas as yours.
+
+Briefly compare the features of these applications with your application idea.
+
+\section{References}
+
+Give references to any material / websites / books etc. relevant to your
+application idea
+
+Give the links to the websites and applications on the Apple Store and Google
+Play Store relevant to your idea, that you listed in the section above.
+
+%\label{sec:examples}
+%
+%\todo{Here's a comment in the margin!}
+%\todo[inline, color=green!40]{This is an inline comment.}
+%
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.5\textwidth]{frog.jpg}
+%\caption{\label{fig:frog}This is a figure caption.}
+%\end{figure}
+%
+%\begin{table}
+%\centering
+%\begin{tabular}{l|r}
+%Item & Quantity \\\hline
+%Widgets & 42 \\
+%Gadgets & 13
+%\end{tabular}
+%\caption{\label{tab:widgets}An example table.}
+%\end{table}
+%
+%\dots
+%
+%\begin{enumerate}
+%\item Like this,
+%\item and like this.
+%\end{enumerate}
+%\dots or bullet points \dots
+%\begin{itemize}
+%\item Like this,
+%\item and like this.
+%\end{itemize}
 
 \end{document}
