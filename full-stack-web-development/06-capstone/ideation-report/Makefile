@@ -4,9 +4,9 @@ FIGS=
 %.pdf: %.tex
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
-#	bibtex $*
-#	pdflatex -interaction=nonstopmode $<
-#	pdflatex -interaction=nonstopmode $<
+	bibtex $*
+	pdflatex -interaction=nonstopmode $<
+	pdflatex -interaction=nonstopmode $<
 
 %.pdf: %.dot
 	dot -Tpdf < $< > $@
@@ -18,7 +18,7 @@ FIGS=
 
 all: $(TARGET).pdf
 
-$(TARGET).pdf: $(FIGS) $(TARGET).tex
+$(TARGET).pdf: $(FIGS) $(TARGET).tex bib.bib
 
 figs: $(FIGS)
 
