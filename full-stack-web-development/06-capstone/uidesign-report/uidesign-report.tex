@@ -34,6 +34,7 @@
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{url}
+\usepackage[section]{placeins}
 
 \begin{document}
 
@@ -49,7 +50,7 @@
 \textsc{\large Capstone Project}\\[0.5cm]
 
 \HRule \\[0.4cm]
-\includegraphics[width=.5\paperwidth]{mymovies.png}
+\includegraphics[width=.5\paperwidth]{fig/mymovies.png}
 \HRule \\[1cm]
  
 
@@ -71,9 +72,9 @@ Jogesh \textsc{Muppala}
 {\large \today}\\[1cm]
 
 \vfill
-\includegraphics[width=.2\paperwidth]{coursera.png}
+\includegraphics[width=.2\paperwidth]{fig/coursera.png}
 \hspace{2cm}
-\includegraphics[width=.2\paperwidth]{hkust.png}
+\includegraphics[width=.2\paperwidth]{fig/hkust.png}
 
 \end{titlepage}
 %----------------------------------------------------------------------------------------
@@ -91,7 +92,7 @@ people you love.
 As a bonus, by keeping track of people's movie watching habits MyMovies is able
 to help the cinema industry on targeting their customer more precisely.
 
-\section{Expected List of Features}
+\subsection{Expected List of Features}
 
 Inside the scope of this project we plan on achieving the following features:
 
@@ -131,55 +132,56 @@ Inside the scope of this project we plan on achieving the following features:
   \item The user will be able to recommend a movie to a friend.
 \end{itemize}
 
-With the aforementioned list of features, we expect to help people not just on
-keeping track of the watched movies but also on their own impressions about it.
-Also, by including the social network features, we expect to deepen the
-experience of the user with each movie they watch.
+\section{User Interface Design and Navigation Structure}
 
-\subsection{Future Features}
+The first page a non-logedin user sees when accessing MyMovies is the
+signup/login screen (Figure \ref{fig:login}). It allows the user to login for
+their account and to create an account.
 
-For future releases of MyMovies, not in the scope of this capstone project, We
-expect to add the following features:
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{fig/01-login.png}
+\caption{\label{fig:login}Sign up / Login page.}
+\end{figure}
 
-\begin{itemize}
-  \item The user will be able to mark a location to where they watched a movie;
-  \item The user will receive movie recommendation based on:
-    \begin{itemize}
-      \item Previous watched movies;
-      \item Movies they want to watch;
-      \item Friend's activities; and
-      \item Likes
-    \end{itemize}
-  \item The user will receive recommendations of movie theaters nearby for
-    movies they want to watch;
-  \item The user will be able to register movie streaming services they
-    subscribe to and search on them for movies they want to watch
-  \item The user will be able to search on movie streaming services for movies
-    they want to watch and compare prices when applicable.
-\end{itemize}
+After the login, the user is redirected to the timeline (Figure
+\ref{fig:timeline}). On this screen there's a search field for finding movies
+as well as friend. There's also a search field for marking movies as "watching
+now". This is field is intended to be easily accessible. Three columns are
+shown in this screen. The left column shows a few users statistics. The middle
+column shows the timeline itself, featuring the recent friends' activity. The
+right column presents a few movie tittles based on the system statistics as
+well as movie premiere dates. This screen is highly inspired on
+Facebook\cite{facebook} and Goodreads\cite{goodreads}.
 
-\section{Market Survey}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{fig/02-timeline.png}
+\caption{\label{fig:timeline}Timeline.}
+\end{figure}
 
-\subsection{Good Shows\cite{goodshows}}
+Upon clicking a movie title (from the timeline of from the search field), the
+user is redirected to the movie details page (Figure \ref{fig:movie}). This
+screen shows some basic information from imdb, such as year, rating and
+description, and also lists friends who watched it as well as comments from
+friend. On this page the user can mark a movie as watched or "want to see".
 
-It offer similar features to MyMovies. However, it's more focused in tv shows
-rather than movies. Also, it offers only mobile applications and no web
-interface.
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{fig/03-movie.png}
+\caption{\label{fig:movie}Movie details page.}
+\end{figure}
 
-\subsection{Rinema\cite{rinema}}
+Upon clicking an user photo or name, the user is redirect to the user details
+page (Figure \ref{fig:user}). This screen shows some user statistics on the
+left side and lists their activity on the middle column. This page allows the
+user to request friendship or start following someone.
 
-Very similar to our proposal, however, as of today, we were not able to sign up
-for an account as the website seems to be broken.
-
-\subsection{I Check Movies\cite{icheckmovies}}
-
-Different of MyMovies, I Check Movies offer subscription plans. By paying a
-different amount, the user is able to have more or less access to some feature.
-
-\subsection{Seen That\cite{seenthat}}
-
-Different of MyMovies, it doesn't offer a timeline feature. Also, most features
-are still under construction.
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{fig/04-user.png}
+\caption{\label{fig:user}User details page.}
+\end{figure}
 
 \bibliographystyle{plain}
 \bibliography{bib}
