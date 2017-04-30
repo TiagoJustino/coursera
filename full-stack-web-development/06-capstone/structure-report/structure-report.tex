@@ -35,6 +35,43 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{url}
 \usepackage[section]{placeins}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
 
 \begin{document}
 
@@ -52,7 +89,6 @@
 \HRule \\[0.4cm]
 \includegraphics[width=.5\paperwidth]{fig/mymovies.png}
 \HRule \\[1cm]
- 
 
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
@@ -78,6 +114,9 @@ Jogesh \textsc{Muppala}
 
 \end{titlepage}
 %----------------------------------------------------------------------------------------
+
+\tableofcontents
+\newpage
 
 \section{Introduction}
 
@@ -134,7 +173,7 @@ Inside the scope of this project we plan on achieving the following features:
 
 \section{Design and Implementation}
 
-\subsection{The REST API Specification}
+\subsection{The REST API Specification} \label{sec:endpoints}.
 
 Here we describe all the endpoints and the supported operations.
 Wikipedia\cite{wikipediarest} was used as reference.
@@ -173,7 +212,7 @@ Wikipedia\cite{wikipediarest} was used as reference.
     \begin{description}
       \item [GET] Lists friends.
     \end{description}
-  \item [/friendship] \hfill
+  \item [/friendship/:id] \hfill
     \begin{description}
       \item [DELETE] Stops being friend to someone.
     \end{description}
@@ -249,24 +288,411 @@ Wikipedia\cite{wikipediarest} was used as reference.
     \end{description}
 \end{description}
 
-\subsection{Front-end Architecture Design}
+\subsection{Front-end Architecture Design} \label{sec:frontend}
 
-% Give some details of the architecture and structure of your front-end, both
-% web application and hybrid mobile application, in a format that you consider
-% suitable, You may choose to use any formal languages or structure diagrams to
-% express the details.
+The client side, for both the web application and the mobile hybrid
+application, will have the following structure:
 
-\subsection{Database Schemas, Design and Structure}
+\begin{description}
+  \item [/index.html] The SPA landing page.
+  \item [/images] Images storage directory.
+  \item [/views] View directory.
+  \item [/styles] CSS storeage directory.
+  \item [/scripts] Javascript files directory.
+  \item [/scripts/app.js] The main application file.
+  \item [/scripts/controllers.js] Controllers definition.
+  \item [/scripts/services.js] Services definition.
+  \item [/views/register.html] User registration page.
+  \item [/views/login.html] Login page.
+  \item [/views/header.html] Website header.
+  \item [/views/footer.html] Website footer.
+  \item [/views/aboutus.html] About us page.
+  \item [/views/timeline.html] The timeline page component.
+  \item [/views/profile.html] The users profile page.
+  \item [/views/stats.html] User statistics page component.
+  \item [/views/watched.html] List of watched movies.
+  \item [/views/wanttowatch.html] List of want to watch movies.
+  \item [/views/dontwanttowatch.html] List of don't want to watch movies.
+  \item [/views/movie.html] Movie details page.
+  \item [/views/group.html] Group details page.
+\end{description}
 
-% Give any details of the database schema and the structure of your database
-% storage (documents etc.).
+\subsection{Database Schemas, Design and Structure} \label{sec:database}
 
-\subsection{Communication}
+The following database Schemas will be used:
 
-% Give the structure of the messages to be communicated between the front-end
-% and the back-end.
+\begin{lstlisting}[caption=User Schema]
+var User = new Schema({
+  username: String,
+  password: String,
+  OauthId: String,
+  OauthToken: String,
+  firstname: {
+    type: String,
+    default: ''
+  },
+  lastname: {
+    type: String,
+    default: ''
+  },
+  picture: {
+    type: String,
+    default: ''
+  },
+  friends: [User],
+  following: [User],
+  watching: {
+    type: WatchingEvent,
+    required: false
+  },
+  watched: [WatchedEvent],
+  wanttowatch: [Movie],
+  dontwanttowatch: [Movie]
+});
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Movie Schema]
+var Movie = new Schema({
+  imdbId: {
+    type: String,
+    required: true
+  }
+});
+\end{lstlisting}
+
+\begin{lstlisting}[caption=FriendshipRequest Schema]
+var FriendshipRequest = new Schema({
+  requester: {
+    type: User,
+    required: true
+  },
+  requestee: {
+    type: User,
+    required: true
+  }
+});
+\end{lstlisting}
+
+\begin{lstlisting}[caption=WachingEvent Schema]
+var WatchingEvent = new Schema({
+  user: {
+    type: User,
+    required: true
+  },
+  movie: {
+    type: Movie,
+    required: true
+  }
+  friends: [User],
+  datetime {
+    type: String,
+    required: true
+  }
+});
+\end{lstlisting}
+
+\begin{lstlisting}[caption=WachedEvent Schema]
+var WatchedEvent = new Schema({
+  user: {
+    type: User,
+    required: true
+  },
+  movie: {
+    type: Movie,
+    required: true
+  }
+  friends: [User],
+  datetime {
+    type: String,
+    required: true
+  }
+});
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Group Schema]
+var Group = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  admin: {
+    type: User,
+    required: true
+  },
+  users: [User]
+});
+\end{lstlisting}
+
+\begin{lstlisting}[caption=GroupJoinRequest Schema]
+var GroupJoinRequest = new Schema({
+  requester: {
+    type: User,
+    required: true
+  },
+  group: {
+    type: Group,
+    required: true
+  }
+});
+\end{lstlisting}
+
+\subsection{Communication} \label{sec:communication}
+
+Here we describe the messages for each one of the operations listed in Section
+\ref{sec:endpoints}.
+
+\begin{description}
+  \item [/users] \hfill
+    \begin{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [username] The username.
+          \item [password] The password.
+          \item [firstname] First name.
+          \item [lastname] Last name.
+        \end{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [name] String to search for users first and last names.
+        \end{description}
+    \end{description}
+  \item [/users/:id] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [PUT] \hfill
+        \begin{description}
+          \item [username] The username.
+          \item [password] The password.
+          \item [firstname] First name.
+          \item [lastname] Last name.
+        \end{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/invitation] \hfill
+    \begin{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [userid] The user id.
+        \end{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/invitation/:id] \hfill
+    \begin{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/follow] \hfill
+    \begin{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [userid] The user id.
+        \end{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/follow/:id] \hfill
+    \begin{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/friendship] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/friendship] \hfill
+    \begin{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/friendshiprequest] \hfill
+    \begin{description}
+      \item [userid] The user id.
+    \end{description}
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/friendshiprequest/:id] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [accept] Set to true.
+        \end{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/watching] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [movieid] The movie id.
+          \item [friends] A list of user ids.
+        \end{description}
+    \end{description}
+  \item [/watching/:id] \hfill
+    \begin{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [PUT] \hfill
+        \begin{description}
+          \item [friends] A list of user ids.
+        \end{description}
+    \end{description}
+  \item [/watched] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [movieid] The movie id.
+          \item [friends] A list of user ids.
+          \item [datetime] When that movie was watched.
+        \end{description}
+    \end{description}
+  \item [/watched/:id] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [PUT] \hfill
+        \begin{description}
+          \item [friends] A list of user ids.
+          \item [datetime] When that movie was watched.
+        \end{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/wanttowatch] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [movieid] The movie id.
+        \end{description}
+    \end{description}
+  \item [/wanttowatch/:id] \hfill
+    \begin{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/dontwanttowatch] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [movieid] The movie id.
+        \end{description}
+    \end{description}
+  \item [/dontwanttowatch/:id] \hfill
+    \begin{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/group] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [name] A name for searching for group names.
+        \end{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [name] The group name.
+        \end{description}
+    \end{description}
+  \item [/group/:id] \hfill
+    \begin{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+      \item [PUT] \hfill
+        \begin{description}
+          \item [name] The group name.
+        \end{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/groupjoin] \hfill
+    \begin{description}
+      \item [POST] \hfill
+        \begin{description}
+          \item [groupid] The group id.
+        \end{description}
+      \item [GET] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+  \item [/group/:id] \hfill
+    \begin{description}
+      \item [DELETE] \hfill
+        \begin{description}
+          \item [(empty)]
+        \end{description}
+    \end{description}
+\end{description}
 
 \section{Conclusions}
+
+This document described important architectural aspects in order to support the
+implementation of MyMovies website. In Section \ref{sec:endpoints} we described
+all the endpoints on the server side, responsible for providing and receiving
+data from the client. In Section \ref{sec:frontend} we described the file
+structure for the client side web application and the mobile hybrid
+application. In Section \ref{sec:database} we present the database Schemas.
+Finally, Section \ref{sec:communication} specified the messages exchanged
+between client side and server side.
 
 % Briefly state what results you expect from your project. Write a summary of
 % your project architecture design and structure.
