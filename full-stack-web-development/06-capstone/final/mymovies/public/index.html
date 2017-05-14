@@ -5,6 +5,7 @@
     <title>Passport Angular</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/mymovies.css">
   </head>
   <body>
     <div class="container">
@@ -19,18 +20,16 @@
           <a class="navbar-brand" href="#">MyMovies</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
+          <ul ng-show="currentUser" class="nav navbar-nav">
             <li ng-class="{ active: isActive('/home')}"><a href="#home">Home</a></li>
-            <li ng-show="!currentUser" ng-class="{ active: isActive('/login')}"><a href="#login">Login</a></li>
-            <li ng-show="!currentUser" ng-class="{ active: isActive('/signup')}"><a href="#signup">Sign Up</a></li>
-            <li ng-show="currentUser" ng-class="{ active: isActive('/profile')}"><a href="#profile">Profile</a></li>
-            <li ng-show="currentUser" ng-class="{ active: isActive('/logout')}"><a href="#logout" ng-click="logout()">Logout</a></li>
+          </ul>
+          <ul ng-show="currentUser" class="nav navbar-nav navbar-right">
+            <li ng-class="{ active: isActive('/profile')}"><a href="#profile">Profile</a></li>
+            <li ng-show="currentUser"><a href="#logout" ng-click="logout()">Logout</a></li>
           </ul>
         </div>
       </nav>
-      <div class="jumbotron">
-        <div ng-view>
-        </div>
+      <div ng-view>
       </div>
     </div>
     <!-- jQuery -->

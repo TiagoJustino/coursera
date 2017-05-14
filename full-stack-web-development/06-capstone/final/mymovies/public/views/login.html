@@ -1,21 +1,62 @@
-<h1>Login</h1>
+<div class="col-sm-6">
+  <h1>MyMovies</h1>
+  <ul class="fa-ul">
+    <li><h2><i class="fa-li fa fa-check-square"></i>Keep track of watched movies</h2></li>
+    <li><h2><i class="fa-li fa fa-check-square"></i>Share with friends</h2></li>
+    <li><h2><i class="fa-li fa fa-spinner fa-spin"></i>Get recommendations</h2></li>
+  </ul>
+</div>
 
-<form class="form-horizontal">
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="username">Username:</label>
-    <div class="col-sm-3">
-      <input class="form-control" id="username" ng-model="user.username"/>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="password">Password:</label>
-    <div class="col-sm-3">
-      <input class="form-control" id="password" ng-model="user.password" type="password"/>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-3 col-sm-offset-2">
-      <button ng-click="login(user)" class="btn btn-block btn-default">Login</button>
-    </div>
-  </div>
-</form>
+<div class="col-sm-6">
+  <form class="form-horizontal">
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border"><h2>Login</h2></legend>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="username">Username:</label>
+        <div class="col-sm-6">
+          <input class="form-control" id="username" ng-model="user.username"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="password">Password:</label>
+        <div class="col-sm-6">
+          <input class="form-control" id="password" ng-model="user.password" type="password"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-4">
+          <button ng-click="login(user)" class="btn btn-block btn-default">Login</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <form class="form-horizontal">
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border"><h2>Sign Up</h2></legend>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="username">Username:</label>
+        <div class="col-sm-6">
+          <input class="form-control" id="username" ng-model="user.username"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="password">Password:</label>
+        <div class="col-sm-6">
+          <input class="form-control" id="password" ng-model="user.password" type="password"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="password2">Confirm password:</label>
+        <div class="col-sm-6">
+          <input class="form-control" id="password2" ng-model="user.password2" type="password"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-4">
+          <button ng-click="signup(user)" class="btn btn-block btn-default">Sign Up</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

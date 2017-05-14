@@ -3,7 +3,7 @@ app.controller("NavCtrl", function($rootScope, $scope, $http, $location) {
     $http.post("/logout")
       .success(function() {
         $rootScope.currentUser = null;
-        $location.url("/home");
+        $location.url("/login");
       });
   }
   $scope.isActive = function (viewLocation) {
@@ -19,7 +19,7 @@ app.controller("SignUpCtrl", function($scope, $http, $rootScope, $location) {
       $http.post('/signup', user)
         .success(function(user) {
           $rootScope.currentUser = user;
-          $location.url("/profile");
+          $location.url("/home");
         });
     }
   }
@@ -30,7 +30,7 @@ app.controller("LoginCtrl", function($location, $scope, $http, $rootScope) {
     $http.post('/login', user)
       .success(function(response) {
         $rootScope.currentUser = response;
-        $location.url("/profile");
+        $location.url("/home");
       });
   }
 });

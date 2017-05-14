@@ -29,5 +29,4 @@ app.use(bodyParser.urlencoded({
 // routes ======================================================================
 require('./routes/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-
 app.listen(3000);
