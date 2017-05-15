@@ -4,6 +4,7 @@ app.config(function($routeProvider) {
   $routeProvider
     .when('/home', {
       templateUrl: 'views/home.html',
+      controller: 'HomeCtrl',
       resolve: {
         logincheck: checkLoggedin
       }
@@ -18,6 +19,13 @@ app.config(function($routeProvider) {
         logincheck: checkLoggedin
       }
     })
+    .when('/movie/:id', {
+      templateUrl: 'views/movie.html',
+      controller: 'MovieCtrl',
+      resolve: {
+        logincheck: checkLoggedin
+      }
+    })
     .otherwise({
       redirectTo: '/home'
     })
@@ -25,7 +33,6 @@ app.config(function($routeProvider) {
 
 var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
   var deferred = $q.defer();
-
   $http.get('/loggedin').success(function(user) {
     $rootScope.errorMessage = null;
     //User is Authenticated

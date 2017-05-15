@@ -12,20 +12,20 @@
     <fieldset class="scheduler-border">
       <legend class="scheduler-border"><h2>Login</h2></legend>
       <div class="form-group">
-        <label class="control-label col-sm-4" for="username">Username:</label>
+        <label class="control-label col-sm-4" for="lusername">Username:</label>
         <div class="col-sm-6">
-          <input class="form-control" id="username" ng-model="user.username"/>
+          <input class="form-control" id="lusername" ng-model="luser.username"/>
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-4" for="password">Password:</label>
+        <label class="control-label col-sm-4" for="lpassword">Password:</label>
         <div class="col-sm-6">
-          <input class="form-control" id="password" ng-model="user.password" type="password"/>
+          <input class="form-control" id="lpassword" ng-model="luser.password" type="password"/>
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-6 col-sm-offset-4">
-          <button ng-click="login(user)" class="btn btn-block btn-default">Login</button>
+          <button ng-click="login(luser)" class="btn btn-block btn-default">Login</button>
         </div>
       </div>
     </fieldset>
@@ -35,26 +35,26 @@
     <fieldset class="scheduler-border">
       <legend class="scheduler-border"><h2>Sign Up</h2></legend>
       <div class="form-group">
-        <label class="control-label col-sm-4" for="username">Username:</label>
+        <label class="control-label col-sm-4" for="susername">Username:</label>
         <div class="col-sm-6">
-          <input class="form-control" id="username" ng-model="user.username"/>
+          <input class="form-control" id="susername" ng-model="suser.username"/>
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-4" for="password">Password:</label>
+        <label class="control-label col-sm-4" for="spassword">Password:</label>
         <div class="col-sm-6">
-          <input class="form-control" id="password" ng-model="user.password" type="password"/>
+          <input class="form-control" id="spassword" ng-model="suser.password" type="password"/>
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-4" for="password2">Confirm password:</label>
+        <label class="control-label col-sm-4" for="spassword2">Confirm password:</label>
         <div class="col-sm-6">
-          <input class="form-control" id="password2" ng-model="user.password2" type="password"/>
+          <input class="form-control" id="spassword2" ng-model="suser.password2" type="password"/>
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-6 col-sm-offset-4">
-          <button ng-click="signup(user)" class="btn btn-block btn-default">Sign Up</button>
+          <button ng-click="signup(suser)" class="btn btn-block btn-default">Sign Up</button>
         </div>
       </div>
     </fieldset>

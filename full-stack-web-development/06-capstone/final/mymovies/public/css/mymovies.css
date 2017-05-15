@@ -9,3 +9,8 @@ legend.scheduler-border {
   border: none;
   font-size: 14px;
 }
+
+img.mymovies-thumbnail {
+  width: autho;
+  max-height: 200px;
+}
