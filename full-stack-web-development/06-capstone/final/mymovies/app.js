@@ -1,6 +1,6 @@
 //Express
 var express = require('express');
-var app = express();
+var app     = express();
 app.use(express.static(__dirname + '/public'));
 
 //Passport
@@ -9,7 +9,9 @@ require('./config/passport')(passport); // pass passport for configuration
 
 //Cookie and session
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
+var session      = require('express-session');
+var port         = process.env.PORT || 3000;
+
 app.use(session({
   secret: 'MzPM5COLyznNOUb1-sNPzOhClBECUS6QM-9smHOhtHSBJS40M5-7QXYJYWXNQgKRTSR',
   resave: false,
@@ -29,4 +31,4 @@ app.use(bodyParser.urlencoded({
 // routes ======================================================================
 require('./routes/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-app.listen(3000);
+app.listen(port);
