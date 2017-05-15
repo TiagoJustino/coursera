@@ -14,7 +14,15 @@ module.exports = function(app, passport) {
 
     // loggedin
     app.get("/loggedin", function(req, res) {
-      res.send(req.isAuthenticated() ? req.user : '0');
+      if(req.isAuthenticated()) {
+        db.User.findOne({
+          username: req.user.username
+        }, function(err, user) {
+          res.send(user);
+        });
+      } else {
+        res.send('0');
+      }
     });
 
     // signup
@@ -27,7 +35,7 @@ module.exports = function(app, passport) {
           return;
         } else {
           var newUser = new db.User();
-          newUser.username = req.body.username.toLowerCase();
+          eewUser.username = req.body.username.toLowerCase();
           newUser.password = newUser.generateHash(req.body.password);
           newUser.save(function(err, user) {
             req.login(user, function(err) {

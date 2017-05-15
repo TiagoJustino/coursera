@@ -1,3 +1,19 @@
 <h1>Profile</h1>
 
 <h3>User: {{ currentUser.username }}</h3>
+
+<ul class="media-list tab-pane fade in active">
+  <li class="media" ng-repeat="movie in movies">
+    <div class="media-left media-middle">
+      <a href="/movie/{{movie.imdbID}}">
+        <img class="media-object img-thumbnail mymovies-thumbnail"
+        ng-src={{getImg(movie)}} alt="{{movie.Title}}">
+      </a>
+    </div>
+    <div class="media-body">
+      <h2 class="media-heading">{{movie.Title}}
+        <button ng-click="del(movie.imdbID)" class="btn btn-danger">Remove</button></h2>
+      <p>{{movie.Plot}}</p>
+    </div>
+  </li>
+</ul>

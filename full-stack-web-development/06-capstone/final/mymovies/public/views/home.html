@@ -17,11 +17,17 @@
         <div class="media-left media-middle">
           <a href="/movie/{{movie.imdbID}}">
             <img class="media-object img-thumbnail mymovies-thumbnail"
-            ng-src={{movie.Poster}} alt="{{movie.Title}}">
+            ng-src={{getImg(movie)}} alt="{{movie.Title}}">
           </a>
         </div>
         <div class="media-body">
-          <h2 class="media-heading">{{movie.Title}}</h2>
+          <h2 class="media-heading">{{movie.Title}}
+            <span ng-show="watched(movie.imdbID)">
+              <button ng-click="del(movie.imdbID)" class="btn btn-danger">Remove</button>
+            </span>
+            <span ng-hide="watched(movie.imdbID)">
+              <button ng-click="add(movie.imdbID)" class="btn btn-success">Add</button>
+            </span></h2>
         </div>
       </li>
     </ul>

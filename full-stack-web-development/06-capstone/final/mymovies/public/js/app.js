@@ -15,6 +15,7 @@ app.config(function($routeProvider) {
     })
     .when('/profile', {
       templateUrl: 'views/profile.html',
+      controller: 'ProfileCtrl',
       resolve: {
         logincheck: checkLoggedin
       }
@@ -36,7 +37,8 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
   $http.get('/loggedin').success(function(user) {
     $rootScope.errorMessage = null;
     //User is Authenticated
-    if (user !== '0') {
+    if (user && user !== '0') {
+      console.log('update currentuser');
       $rootScope.currentUser = user;
       deferred.resolve();
     } else { //User is not Authenticated
