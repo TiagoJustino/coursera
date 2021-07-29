@@ -1,13 +1,7 @@
-import { BigNumber } from "bignumber.js";
-
 const UNDEFINED: string = 'undefined';
 
-const _x: string = '5678221345709827345897230475098237489572937459871236401762516723';
-const _y: string = '9876543210987654321009120934090912034178789701234789798665127346';
-const _xbn: BigNumber = new BigNumber(_x);
-const _ybn: BigNumber = new BigNumber(_y);
-
-console.log(_xbn.times(_ybn).toFixed());
+const _x: string = process.argv[2];
+const _y: string = process.argv[3];
 
 function split(x: string, h: number): Array<string> {
   let f: string;
@@ -56,13 +50,29 @@ function sum(x: string, y: string): string {
 }
 
 function diff(x: string, y: string): string {
-  // TODO
-  // const _x: number = parseInt(x, 10);
-  // const _y: number = parseInt(y, 10);
-  // return `${_x - _y}`;
-  const _x: BigNumber = new BigNumber(x);
-  const _y: BigNumber = new BigNumber(y);
-  return _x.minus(_y).toFixed();
+  let digits: Array<number> = [];
+  let carry: number = 0;
+
+  const len = Math.max(x.length, y.length);
+  const _x: Array<string> = x.split('').reverse();
+  const _y: Array<string> = y.split('').reverse();
+
+  for(let i = 0; i < len; i++) {
+    const xi = _x[i];
+    const yi = _y[i];
+    const a: number = typeof xi === UNDEFINED ? 0 : parseInt(xi, 10);
+    const b: number = typeof yi === UNDEFINED ? 0 : parseInt(yi, 10);
+    const curr = a - (b + carry);
+    const digit = curr < 0 ? 10 + curr : curr;
+    carry = curr < 0 ? 1 : 0;
+    digits.push(digit);
+  }
+
+  digits = digits.reverse();
+
+  const ret: string = digits.join('');
+  
+  return ret;
 }
 
 function times_tenth_power(x: string, n: number): string {
