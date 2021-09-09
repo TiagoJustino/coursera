@@ -40,6 +40,10 @@ function ChoosePivotRight(A: Array<number>, l: number, r: number): number {
     return r;
 }
 
+function ChoosePivotMedian(A: Array<number>, l: number, r: number): number {
+    return r;
+}
+
 /* QuickSort (array A, length n)
        If n=1 return
        p = ChoosePivot(A,n)
@@ -63,6 +67,7 @@ const x: Array<number> = [1,2,3,4];
 const y: Array<number> = _.shuffle(x);
 let z: Array<number>;
 
+console.log('==== LEFT =================');
 z = _.clone(y);
 console.log(`[${z.join(', ')}]`);
 comparisons = 0;
@@ -70,11 +75,20 @@ QuickSort(z, 0, y.length - 1, ChoosePivotLeft);
 console.log(`[${z.join(', ')}]`);
 console.log(`comparisons = ${comparisons}`);
 
-console.log('===========================');
+console.log('==== RIGHT ================');
 
 z = _.clone(y);
 console.log(`[${z.join(', ')}]`);
 comparisons = 0;
 QuickSort(z, 0, y.length - 1, ChoosePivotRight);
+console.log(`[${z.join(', ')}]`);
+console.log(`comparisons = ${comparisons}`);
+
+console.log('==== MEDIAN ===============');
+
+z = _.clone(y);
+console.log(`[${z.join(', ')}]`);
+comparisons = 0;
+QuickSort(z, 0, y.length - 1, ChoosePivotMedian);
 console.log(`[${z.join(', ')}]`);
 console.log(`comparisons = ${comparisons}`);
