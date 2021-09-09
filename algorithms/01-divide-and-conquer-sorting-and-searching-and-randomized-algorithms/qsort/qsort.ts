@@ -18,7 +18,8 @@ function Swap(A: Array<number>, i: number, j: number): void {
        swap A[l] and A[i - 1] */
 
 function Partition(A: Array<number>, l: number, r: number, pi: number): number {
-    const p: number = A[pi];
+    Swap(A, l, pi);
+    const p: number = A[l];
     let i: number = l + 1;
     for(let j: number = l + 1; j <= r; j++) {
         if(A[j] < p) {
@@ -30,8 +31,13 @@ function Partition(A: Array<number>, l: number, r: number, pi: number): number {
     return i - 1;
 }
 
-function ChoosePivot(A: Array<number>, l: number, r: number): number {
+type ChoosePivotFunction = (A: Array<number>, l: number, r: number) => number;
+function ChoosePivotLeft(A: Array<number>, l: number, r: number): number {
     return l;
+}
+
+function ChoosePivotRight(A: Array<number>, l: number, r: number): number {
+    return r;
 }
 
 /* QuickSort (array A, length n)
@@ -41,21 +47,34 @@ function ChoosePivot(A: Array<number>, l: number, r: number): number {
        Recursively sort 1st part
        Recursively sort 2nd part */
 
-function QuickSort(A: Array<number>, l: number, r: number): void {
+function QuickSort(A: Array<number>, l: number, r: number, ChoosePivot: ChoosePivotFunction): void {
     if(l >= r) {
         return;
     }
     comparisons += r - l
     const pi: number = ChoosePivot(A, l, r);
     const npi = Partition(A, l, r, pi);
-    // console.log(`l[${l}] r[${r}] pi[${pi}] npi[${npi}] A[${A.join(', ')}]`);
-    QuickSort(A, l, npi - 1);
-    QuickSort(A, npi + 1, r);
+    // console.log(`l[${l}] r[${r}] pi[${pi}] npi[${npi}] comparisons=[${comparisons}] A[${A.join(', ')}]`);
+    QuickSort(A, l, npi - 1, ChoosePivot);
+    QuickSort(A, npi + 1, r, ChoosePivot);
 }
 
-const x: Array<number> = [1,2,3,4,5,6,7,8,9];
+const x: Array<number> = [1,2,3,4];
 const y: Array<number> = _.shuffle(x);
-console.log(`[${y.join(', ')}]`);
-QuickSort(y, 0, y.length - 1);
-console.log(`[${y.join(', ')}]`);
+let z: Array<number>;
+
+z = _.clone(y);
+console.log(`[${z.join(', ')}]`);
+comparisons = 0;
+QuickSort(z, 0, y.length - 1, ChoosePivotLeft);
+console.log(`[${z.join(', ')}]`);
+console.log(`comparisons = ${comparisons}`);
+
+console.log('===========================');
+
+z = _.clone(y);
+console.log(`[${z.join(', ')}]`);
+comparisons = 0;
+QuickSort(z, 0, y.length - 1, ChoosePivotRight);
+console.log(`[${z.join(', ')}]`);
 console.log(`comparisons = ${comparisons}`);
