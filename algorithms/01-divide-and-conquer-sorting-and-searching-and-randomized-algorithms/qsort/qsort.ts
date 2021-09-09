@@ -1,5 +1,7 @@
 import * as _ from 'lodash';
 
+let comparisons: number = 0;
+
 function Swap(A: Array<number>, i: number, j: number): void {
     const tmp: number = A[i];
     A[i] = A[j];
@@ -43,6 +45,7 @@ function QuickSort(A: Array<number>, l: number, r: number): void {
     if(l >= r) {
         return;
     }
+    comparisons += r - l
     const pi: number = ChoosePivot(A, l, r);
     const npi = Partition(A, l, r, pi);
     // console.log(`l[${l}] r[${r}] pi[${pi}] npi[${npi}] A[${A.join(', ')}]`);
@@ -55,3 +58,4 @@ const y: Array<number> = _.shuffle(x);
 console.log(`[${y.join(', ')}]`);
 QuickSort(y, 0, y.length - 1);
 console.log(`[${y.join(', ')}]`);
+console.log(`comparisons = ${comparisons}`);
