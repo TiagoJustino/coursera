@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import * as fs from "fs";
+import * as fs from 'fs';
 
 let comparisons: number = 0;
 
