@@ -1,0 +1,48 @@
+{
+  "version": "2.0.2",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": ".",
+    "baseUrl": "types",
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "dom",
+      "ES2019"
+    ],
+    "target": "ES2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "strict": true,
+    "allowJs": false,
+    "removeComments": true,
+    "noEmit": false,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": [
+    "node_modules",
+    "scripts",
+    "gulpfile.ts",
+    "build",
+    "fourvision",
+    "ormconfig.ts"
+  ]
+}
