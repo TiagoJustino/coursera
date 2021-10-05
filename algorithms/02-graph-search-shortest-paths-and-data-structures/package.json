@@ -2,7 +2,7 @@
   "name": "scc",
   "version": "1.0.0",
   "description": "",
-  "main": "scc.js",
+  "main": "scc/scc.js",
   "devDependencies": {
     "@angular-eslint/eslint-plugin": "^12.5.0",
     "@angular-eslint/eslint-plugin-template": "^12.5.0",
@@ -26,7 +26,7 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "dev": "tsc-watch -p ./tsconfig.json --incremental --onSuccess \"node --stack-size=5105042 --inspect=9228 dijkstra.js\""
+    "dev": "tsc-watch -p ./tsconfig.json --incremental --onSuccess \"node --stack-size=5105042 --inspect=9228 ./median/median.js\""
   },
   "author": "",
   "license": "ISC",

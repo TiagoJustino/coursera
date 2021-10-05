@@ -2,7 +2,6 @@
   "version": "2.0.2",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": ".",
     "baseUrl": "types",
     "types": [
       "node"
@@ -38,7 +37,7 @@
     "forceConsistentCasingInFileNames": true
   },
   "exclude": [
-    "node_modules",
+    "scc/node_modules",
     "scripts",
     "gulpfile.ts",
     "build",

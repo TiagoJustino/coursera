@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
+const path = require("path");
 const sourceMapSupport = require("source-map-support");
 sourceMapSupport.install();
 class Graph {
@@ -49,7 +50,9 @@ class Graph {
 }
 const prod = true;
 const inputT = '1  2,1 3,4\n2  3,2 4,6\n3  4,3\n';
-const inputP = fs.readFileSync('./dijkstra.txt').toString();
+const inputP = fs
+    .readFileSync(path.join(__dirname, '/dijkstra.txt'))
+    .toString();
 const input = prod ? inputP.trim() : inputT.trim();
 const lines = input.split('\n');
 const graph = new Graph();

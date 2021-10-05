@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as path from 'path';
 import * as sourceMapSupport from 'source-map-support';
 
 sourceMapSupport.install();
@@ -58,7 +59,9 @@ class Graph {
 
 const prod: boolean = true;
 const inputT: string = '1  2,1 3,4\n2  3,2 4,6\n3  4,3\n';
-const inputP: string = fs.readFileSync('./dijkstra.txt').toString();
+const inputP: string = fs
+  .readFileSync(path.join(__dirname, '/dijkstra.txt'))
+  .toString();
 const input: string = prod ? inputP.trim() : inputT.trim();
 const lines: Array<string> = input.split('\n');
 const graph: Graph = new Graph();
