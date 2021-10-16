@@ -26,7 +26,7 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "dev": "tsc-watch -p ./tsconfig.json --incremental --onSuccess \"node --stack-size=5105042 --inspect=9228 ./median/median.js\""
+    "dev": "tsc-watch -p ./tsconfig.json --incremental --onSuccess \"node --max-old-space-size=4096 --stack-size=5105042 --inspect=9228 ./2sum/2sum.js\""
   },
   "author": "",
   "license": "ISC",
