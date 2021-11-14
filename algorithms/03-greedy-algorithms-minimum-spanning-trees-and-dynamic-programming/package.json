@@ -1,0 +1,38 @@
+{
+  "name": "scc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scc/scc.js",
+  "devDependencies": {
+    "@angular-eslint/eslint-plugin": "^12.5.0",
+    "@angular-eslint/eslint-plugin-template": "^12.5.0",
+    "@angular/compiler": "^12.2.7",
+    "@types/node": "^16.10.1",
+    "@types/source-map-support": "^0.5.4",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/eslint-plugin-tslint": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-implicit-dependencies": "^1.1.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsdoc": "^36.1.0",
+    "eslint-plugin-no-null": "^1.0.2",
+    "eslint-plugin-unicorn": "^36.0.0",
+    "prettier": "^2.4.1",
+    "tsc-watch": "^4.5.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "dev": "tsc-watch -p ./tsconfig.json --incremental --onSuccess \"node --max-old-space-size=4096 --stack-size=5105042 --inspect=9228 ./pa-01/edges.js\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bignumber.js": "^9.0.1",
+    "lodash": "^4.17.21",
+    "source-map-support": "^0.5.20"
+  }
+}
