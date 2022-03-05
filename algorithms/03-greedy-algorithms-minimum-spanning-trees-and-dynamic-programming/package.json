@@ -26,7 +26,7 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "dev": "tsc-watch -p ./tsconfig.json --incremental --onSuccess \"node --max-old-space-size=4096 --stack-size=5105042 --inspect=9228 ./pa-01/edges.js\""
+    "dev": "tsc-watch -p ./tsconfig.json --incremental --onSuccess \"node --max-old-space-size=4096 --stack-size=5105042 --inspect=9228 ./pa-02/clustering1.js\""
   },
   "author": "",
   "license": "ISC",
